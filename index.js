@@ -39,6 +39,11 @@ async function testDatabaseConnection() {
 
 testDatabaseConnection();
 
+// Redirect root URL to Swagger UI route
+app.get('/', (req, res) => {
+    res.redirect('/api-docs');
+});
+
 // Start the server
 const server = app.listen(port, () => {
     logger.info(`Server is listening at http://localhost:${port}`);
