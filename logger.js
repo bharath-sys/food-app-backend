@@ -3,7 +3,7 @@ const winston = require('winston');
 const colors = {
     error: 'red',
     warn: 'yellow',
-    info: 'green',
+    info: 'blue',
     debug: 'white'
 };
 
