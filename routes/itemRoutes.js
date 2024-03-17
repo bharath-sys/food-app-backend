@@ -4,10 +4,35 @@ const itemController = require('../controllers/itemController');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Item:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           format: int64
+ *           description: The item's ID.
+ *         type:
+ *           type: string
+ *           description: The type of the item.
+ *         description:
+ *           type: string
+ *           description: The description of the item.
+ */
+
+/**
+ * @swagger
  * /items:
  *   post:
  *     summary: Create a new item
  *     description: Create a new item.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Item'
  *     responses:
  *       201:
  *         description: Item created successfully
@@ -21,6 +46,12 @@ const itemController = require('../controllers/itemController');
  *     responses:
  *       200:
  *         description: A list of items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Item'
  *       500:
  *         description: Failed to retrieve items
  */
@@ -37,11 +68,16 @@ router.get('/', itemController.getAllItems);
  *       - in: path
  *         name: id
  *         required: true
- *         type: string
+ *         type: integer
+ *         format: int64
  *         description: Item ID
  *     responses:
  *       200:
  *         description: Item information
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Item'
  *       404:
  *         description: Item not found
  *       500:
@@ -53,7 +89,8 @@ router.get('/', itemController.getAllItems);
  *       - in: path
  *         name: id
  *         required: true
- *         type: string
+ *         type: integer
+ *         format: int64
  *         description: Item ID
  *     requestBody:
  *       description: Updated item data
@@ -61,7 +98,7 @@ router.get('/', itemController.getAllItems);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Item'  # Assuming you have a schema defined for Item
+ *             $ref: '#/components/schemas/Item'
  *     responses:
  *       200:
  *         description: Item updated successfully

@@ -5,6 +5,35 @@ const { body } = require('express-validator');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Pricing:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *         organization_id:
+ *           type: string
+ *         item_id:
+ *           type: string
+ *         zone:
+ *           type: string
+ *         base_distance_in_km:
+ *           type: number
+ *         km_price:
+ *           type: string
+ *         fix_price:
+ *           type: number
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @swagger
  * /pricing/calculate-price:
  *   post:
  *     summary: Calculate total price
@@ -69,28 +98,7 @@ router.post('/calculate-price',[[
  *             schema:
  *               type: array
  *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: string
- *                   organization_id:
- *                     type: string
- *                   item_id:
- *                     type: string
- *                   zone:
- *                     type: string
- *                   base_distance_in_km:
- *                     type: number
- *                   km_price:
- *                     type: string
- *                   fix_price:
- *                     type: number
- *                   createdAt:
- *                     type: string
- *                     format: date-time
- *                   updatedAt:
- *                     type: string
- *                     format: date-time
+ *                 $ref: '#/components/schemas/Pricing'
  *       500:
  *         description: Internal server error
  */
@@ -107,27 +115,7 @@ router.get('/', pricingController.getAllPricing);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               organization_id:
- *                 type: string
- *               item_id:
- *                 type: string
- *               zone:
- *                 type: string
- *               base_distance_in_km:
- *                 type: number
- *               km_price:
- *                 type: string
- *               fix_price:
- *                 type: number
- *             required:
- *               - organization_id
- *               - item_id
- *               - zone
- *               - base_distance_in_km
- *               - km_price
- *               - fix_price
+ *             $ref: '#/components/schemas/Pricing'
  *     responses:
  *       201:
  *         description: Pricing created successfully
@@ -163,28 +151,7 @@ router.post('/', pricingController.createPricing);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: string
- *                 organization_id:
- *                   type: string
- *                 item_id:
- *                   type: string
- *                 zone:
- *                   type: string
- *                 base_distance_in_km:
- *                   type: number
- *                 km_price:
- *                   type: string
- *                 fix_price:
- *                   type: number
- *                 createdAt:
- *                   type: string
- *                   format: date-time
- *                 updatedAt:
- *                   type: string
- *                   format: date-time
+ *               $ref: '#/components/schemas/Pricing'
  *       404:
  *         description: Pricing not found
  *       500:
@@ -216,21 +183,7 @@ router.get('/:organizationId/:itemId', pricingController.getPricingByOrganizatio
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               zone:
- *                 type: string
- *               base_distance_in_km:
- *                 type: number
- *               km_price:
- *                 type: string
- *               fix_price:
- *                 type: number
- *             required:
- *               - zone
- *               - base_distance_in_km
- *               - km_price
- *               - fix_price
+ *             $ref: '#/components/schemas/Pricing'
  *     responses:
  *       200:
  *         description: Pricing updated successfully

@@ -4,10 +4,33 @@ const organizationController = require('../controllers/organizationController');
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Organization:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           format: int64
+ *           description: The organization's ID.
+ *         name:
+ *           type: string
+ *           description: The name of the organization.
+ */
+
+/**
+ * @swagger
  * /organizations:
  *   post:
  *     summary: Create a new organization
  *     description: Create a new organization.
+ *     requestBody:
+ *       description: Organization data
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Organization'
  *     responses:
  *       201:
  *         description: Organization created successfully
@@ -37,8 +60,10 @@ router.get('/', organizationController.getAllOrganizations);
  *       - in: path
  *         name: id
  *         required: true
- *         type: string
  *         description: Organization ID
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     responses:
  *       200:
  *         description: Organization information
@@ -53,15 +78,17 @@ router.get('/', organizationController.getAllOrganizations);
  *       - in: path
  *         name: id
  *         required: true
- *         type: string
  *         description: Organization ID
+ *         schema:
+ *           type: integer
+ *           format: int64
  *     requestBody:
  *       description: Updated organization data
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Organization'  # Assuming you have a schema defined for Organization
+ *             $ref: '#/components/schemas/Organization'
  *     responses:
  *       200:
  *         description: Organization updated successfully
