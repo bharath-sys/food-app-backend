@@ -12,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: 'http://localhost:3000', // Change this URL to match your server's URL
+                url: 'https://food-app-backend-df1q.onrender.com', // Change this URL to match your server's URL
                 description: 'Development server'
             }
         ]
